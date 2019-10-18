@@ -1,0 +1,49 @@
+{% extends 'base_user.html' %}
+
+
+{% load static %}
+
+
+{% block title %}
+    {{ block.super }}
+    登录
+{% endblock %}
+
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/user/js/login.js' %}"></script>
+{% endblock %}
+
+
+
+{% block content %}
+    {{ block.super }}
+    <div class="container">
+        <span style="color: red">{{ msg }}</span>
+        <form action="{% url 'axfuser:login' %}" method="post" onsubmit="return parse();">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="exampleInputName">用户名</label>
+                <input name='name' type="text" class="form-control" id="exampleInputName" placeholder="用户名字3到6个字母">
+                <span id="nameinfo"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">密码</label>
+                <input name="password" type="password" class="form-control" id="password" placeholder="请输入密码">
+            </div>
+            <label for="imgcode">验证码</label>
+            <div class="form-group">
+{#                <label for="imgcode">验证码</label>#}
+                <span style="float: left">
+                    <input type="text" name="imgcode" class="form-control imgcode" placeholder="请输入验证码">
+                </span>
+                <img src="/axfuser/get_code/" alt="" id="changeImg" onclick="changeImage()">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">登录</button>
+        </form>
+    </div>
+{% endblock %}

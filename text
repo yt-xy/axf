@@ -1,0 +1,39 @@
+模板架构
+    首页    闪购   购物车  我的   登录     注册
+    home  market  cart  mine  login  register
+
+
+    base.html
+        base_main.html
+            home.html      首页
+            market.html    闪购
+            cart.html      购物车
+            mine.html      我的
+
+        base_user.html
+            login.html     登录
+            register.html  注册
+
+静态资源架构
+    static
+        css
+        js
+        img
+        fonts
+        upload
+
+        axf
+            main
+                home
+                    css
+                    js
+                market
+                    css
+                    js
+                cart
+                    css
+                    js
+                mine
+                    css
+                    js
+            user

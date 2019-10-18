@@ -1,0 +1,119 @@
+{% extends 'base_main.html' %}
+
+{% load static %}
+
+
+{% block title %}
+    {{ block.super }}
+    闪购
+{% endblock %}
+
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'axf/main/market/css/market.css' %}">
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <div id="market">
+        {#  左边栏 #}
+        <aside>
+            <ul>
+                {% for foodtype in foodtypes %}
+                <li>
+                    {% if typeid == foodtype.typeid %}
+                        <span class="yellowSlide"></span>
+                    {% endif %}
+                    <a href="{% url 'axfmarket:market' %}?typeid={{foodtype.typeid}}">{{ foodtype.typename }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        {#  右上栏 #}
+        <nav>
+            <ul>
+                <li id="all_type">
+                    <span>全部分类<span class="glyphicon glyphicon-chevron-down"></span></span>
+                </li>
+                <li id="type_sort">
+                    <span>综合排序<span class="glyphicon glyphicon-chevron-down"></span></span>
+                </li>
+            </ul>
+        </nav>
+
+        {#    #}
+        <div class="divright">
+        <section>
+            <menu>
+                <ul>
+                    {% for goods in goods_list %}
+                        <li>
+                            <a href="">
+                                <img src="/static{{ goods.productimg }}" alt="">
+                                <span class="shoppingInfo">
+                                    <h6>{{ goods.productlongname }}</h6>
+                                </span>
+
+                                <p class="detailTag">
+                                    <span>精选</span>
+                                    <span></span>
+                                </p>
+
+                                <span class="unit">{{ goods.specifics }}</span>
+
+                                <span class="price">
+                                    <span>￥{{ goods.price }}</span>
+                                    <s>￥{{ goods.marketprice }}</s>
+                                </span>
+                            </a>
+
+                            <section>
+                                <button class="subShopping">-</button>
+                                <span>{{ goods.c_goods_num }}</span>
+                                <button class="addShopping" goodsid="{{ goods.id }}">+</button>
+                            </section>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div id="all_type_container" hidden>
+                    <div>
+                        {% for typename in typename_list %}
+                            <a href="{% url 'axfmarket:market' %}?childcid={{ typename.1 }}&typeid={{ typeid }}">
+                                {% if childcid == typename.1 %}
+                                    <span style="background-color: blue">{{ typename.0 }}</span>
+                                    {% else %}
+                                        <span>{{ typename.0 }}</span>
+                                {% endif %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div id="type_sort_container" hidden>
+                    <div>
+                        {% for sort in sort_list %}
+                            <a href="{% url 'axfmarket:market' %}?sortid={{ sort.1 }}&childcid={{ childcid }}&typeid={{ typeid }}">
+                                {% if sortid == sort.1 %}
+                                    <span style="background-color: blue">{{ sort.0 }}</span>
+                                    {% else %}
+                                        <span>{{ sort.0 }}</span>
+                                {% endif %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </menu>
+        </section>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/main/market/js/market.js' %}"></script>
+{% endblock %}

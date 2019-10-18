@@ -1,0 +1,22 @@
+header{
+    width: 100%;
+    height: 1.5rem;
+    font-size:0.277777rem;
+    border-top:1px solid #f0f0f0;
+    z-index:10;
+    /*position:fixed;*/
+    display: flex;
+    background: orange;
+}
+
+.imgcode{
+    margin-top: 8px;
+    width: 190px;
+}
+
+#changeImg{
+    float: right;
+    margin-bottom: 30px;
+}
+
+
